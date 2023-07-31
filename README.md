@@ -52,7 +52,7 @@ npm run dev
 
 | User/Name| Osu Profile |
 | ------ | ------ |
-| Chord | https://osu.ppy.sh/users/12467741 |
+| Chord | https://osu.ppy.sh/users/chord |
 
 
 ## License
