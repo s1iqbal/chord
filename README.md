@@ -41,9 +41,8 @@ npm run dev
 
 | Priority | Task | Explanation |
 | ------ | ------ | ------ |
-|1| Global Rate Limiter| Have a global rate limiter that corrosponds to Bancho's rate limits for 10 message per 5 secs |
-|2| Spam Filter for User | Have a spam filter that uses a database and time stamps to limit each user request. |
-|3| Better Filters| Ability to filter MMR, star rating, and BPM by range. (Example: bpm>20<10 would search between 10 and 20) |
+|1| Spam Filter for User | Have a spam filter that uses a database and time stamps to limit each user request. |
+|2| Better Filters| Ability to filter MMR, star rating, and BPM by range. (Example: bpm>20<10 would search between 10 and 20) |
 
 
 
@@ -58,6 +57,4 @@ npm run dev
 ## License
 
 MIT
-
-**Free Software, Hell Yeah!**
 
