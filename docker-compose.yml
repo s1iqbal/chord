@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  chord_bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm start
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - IRC_USERNAME=$IRC_USERNAME
+      - IRC_PASSWORD=$IRC_PASSWORD
+    ports:
+      - "5000:5000"
