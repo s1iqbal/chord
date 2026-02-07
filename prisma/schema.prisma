@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pool {
+  id         Int    @id @default(autoincrement())
+  version    Int
+  name       String
+  link       String
+  averageMMR Float  @map("average_mmr")
+  uuid       String @unique @default(uuid())
+  maps       Map[]
+
+  @@index([averageMMR])
+  @@map("pools")
+}
+
+model Map {
+  id                Int     @id @default(autoincrement())
+  mapId             Int     @map("map_id")
+  mod               String
+  mapName           String  @map("map_name")
+  difficultyName    String  @map("difficulty_name")
+  length            Int
+  starRating        Float   @map("star_rating")
+  mapSetId          Int     @map("map_set_id")
+  maxCombo          Int     @map("max_combo")
+  bpm               Int
+  downloadAvailable Boolean @default(true) @map("download_available")
+  mmr               Float
+  skillset          String  @default("NOT_DEFINED")
+  sheetId           String  @map("sheet_id")
+  poolName          String  @map("pool_name")
+
+  pool   Pool @relation(fields: [poolId], references: [id], onDelete: Cascade)
+  poolId Int  @map("pool_id")
+
+  @@index([mmr])
+  @@index([mod])
+  @@index([bpm])
+  @@index([starRating])
+  @@map("maps")
+}
