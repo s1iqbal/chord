@@ -1,0 +1,47 @@
+.panel {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 8px;
+  padding: 1.5rem;
+  min-height: 150px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.meta {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.msg {
+  color: #53d8fb;
+  margin: 0.25rem 0;
+}
+
+.msg a {
+  color: #ff6b9d;
+  text-decoration: none;
+}
+
+.msg a:hover {
+  text-decoration: underline;
+}
+
+.error {
+  color: #ff4757;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #0f3460;
+  margin: 1rem 0;
+}
+
+.json {
+  color: #888;
+  font-size: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,21 @@
+.presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.preset {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  background: #0f3460;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+.preset:hover {
+  background: #1a4a8a;
+}
