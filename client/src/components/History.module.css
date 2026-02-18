@@ -1,0 +1,45 @@
+.history {
+  margin-top: 2rem;
+}
+
+.heading {
+  color: #888;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 4px;
+  color: #e0e0e0;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.entry:hover {
+  border-color: #ff6b9d;
+  background: #1a2744;
+}
+
+.cmd {
+  color: #53d8fb;
+}
+
+.info {
+  color: #888;
+  font-size: 0.75rem;
+}

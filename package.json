@@ -2,18 +2,42 @@
   "name": "osubot",
   "version": "1.0.0",
   "description": "osu bot",
-  "main": "app.js",
+  "main": "dist/main.js",
   "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "nest build",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:seed": "ts-node prisma/seed.ts",
+    "db:setup": "prisma migrate deploy && ts-node prisma/seed.ts"
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "author": "saad",
   "license": "ISC",
   "dependencies": {
+    "@nestjs/common": "^11.1.13",
+    "@nestjs/config": "^4.0.3",
+    "@nestjs/core": "^11.1.13",
+    "@nestjs/platform-express": "^11.1.13",
+    "@prisma/client": "^5.22.0",
     "bancho.js": "^0.9.7",
     "bottleneck": "^2.19.5",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.16",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.2.1",
+    "prisma": "^5.22.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.9.3"
   }
 }

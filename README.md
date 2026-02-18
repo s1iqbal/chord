@@ -3,7 +3,8 @@
 
 
 Chord bot is an IRC bot that responds to the user's query by supplying them an offical tournament map based on MMR and the filters provided.
-
+I have upgraded it to use a database system instead of a local file system for every query. This ensures that theres less processing time on the server
+when handling queries and allows the pools and maps to be populated or edited without restarting the service.
 
 ## Commands
 
@@ -26,25 +27,14 @@ Create a .env file in the root directory with the following key value pairs
 ```
 touch .env
 ```
-
 IRC_USERNAME=
 IRC_PASSWORD=
+DATABASE_URL=
 
-and use the irc values for your account to have the bot running locally.
-
-You can then install the node modules and run the bot locally.
 ```
 npm i
 npm run dev
 ```
-## TODO
-
-| Priority | Task | Explanation |
-| ------ | ------ | ------ |
-|1| Spam Filter for User | Have a spam filter that uses a database and time stamps to limit each user request. |
-|2| Better Filters| Ability to filter MMR, star rating, and BPM by range. (Example: bpm>20<10 would search between 10 and 20) |
-
-
 
 
 ## Collaborators
@@ -55,6 +45,5 @@ npm run dev
 
 
 ## License
-
 MIT
 
