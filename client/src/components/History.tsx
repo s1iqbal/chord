@@ -1,4 +1,4 @@
-import { HistoryEntry } from '../types';
+import type { HistoryEntry } from '../types';
 import styles from './History.module.css';
 
 interface Props {

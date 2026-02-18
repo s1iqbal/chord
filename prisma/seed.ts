@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 interface PoolData {
   version: number;
   name: string;
-  link: string;
+  link?: string;
   averageMMR: number;
   uuid?: string;
   maps: MapData[];

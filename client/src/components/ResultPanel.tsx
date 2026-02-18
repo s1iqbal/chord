@@ -1,4 +1,4 @@
-import { RecommendResponse } from '../types';
+import type { RecommendResponse } from '../types';
 import styles from './ResultPanel.module.css';
 
 interface Props {

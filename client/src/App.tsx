@@ -3,7 +3,7 @@ import { CommandInput } from './components/CommandInput';
 import { PresetButtons } from './components/PresetButtons';
 import { ResultPanel } from './components/ResultPanel';
 import { History } from './components/History';
-import { RecommendResponse, HistoryEntry } from './types';
+import type { RecommendResponse, HistoryEntry } from './types';
 import styles from './App.module.css';
 
 const API_URL = '/recommend';

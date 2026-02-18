@@ -8,12 +8,12 @@ datasource db {
 }
 
 model Pool {
-  id         Int    @id @default(autoincrement())
+  id         Int     @id @default(autoincrement())
   version    Int
   name       String
-  link       String
-  averageMMR Float  @map("average_mmr")
-  uuid       String @unique @default(uuid())
+  link       String?
+  averageMMR Float   @map("average_mmr")
+  uuid       String  @unique @default(uuid())
   maps       Map[]
 
   @@index([averageMMR])
