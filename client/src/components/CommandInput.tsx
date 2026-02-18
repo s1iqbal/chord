@@ -1,4 +1,4 @@
-import { forwardRef, useState, KeyboardEvent } from 'react';
+import { forwardRef, useState, type KeyboardEvent } from 'react';
 import styles from './CommandInput.module.css';
 
 interface Props {
