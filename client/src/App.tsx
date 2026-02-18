@@ -6,8 +6,7 @@ import { History } from './components/History';
 import type { RecommendResponse, HistoryEntry } from './types';
 import styles from './App.module.css';
 
-const API_URL = '/recommend';
-
+const API_URL = `${import.meta.env.VITE_BASE_API_URL}/recommend`;
 function App() {
   const [result, setResult] = useState<RecommendResponse | null>(null);
   const [loading, setLoading] = useState(false);
