@@ -1,15 +1,42 @@
-version: '3'
+version: '3.8'
 
 services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chord
+      POSTGRES_PASSWORD: chord
+      POSTGRES_DB: chord
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   chord_bot:
     build:
       context: .
       dockerfile: Dockerfile
-    command: npm start
     restart: unless-stopped
     env_file: .env
     environment:
-      - IRC_USERNAME=$IRC_USERNAME
-      - IRC_PASSWORD=$IRC_PASSWORD
+      - IRC_USERNAME=${IRC_USERNAME}
+      - IRC_PASSWORD=${IRC_PASSWORD}
+      - DATABASE_URL=postgresql://chord:chord@db:5432/chord?schema=public
     ports:
       - "5000:5000"
+    depends_on:
+      - db
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - chord_bot
+
+volumes:
+  pgdata:
