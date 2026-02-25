@@ -1,0 +1,148 @@
+.card {
+  background: #16213e;
+  border: 1px solid #0f3460;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: #1a4a8a;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  color: #e0e0e0;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  background: #0f3460;
+  color: #53d8fb;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+
+.actionBtn {
+  background: transparent;
+  border: 1px solid #0f3460;
+  color: #888;
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.actionBtn:hover {
+  color: #ff6b9d;
+  border-color: #ff6b9d;
+}
+
+.deleteBtn:hover {
+  color: #ff4757;
+  border-color: #ff4757;
+}
+
+.chevron {
+  color: #888;
+  font-size: 0.75rem;
+  margin-left: 0.25rem;
+}
+
+.body {
+  border-top: 1px solid #0f3460;
+  padding: 1rem 1.25rem;
+}
+
+.link {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.link a {
+  color: #53d8fb;
+  text-decoration: none;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
+
+.mapsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.mapsTitle {
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.addMapBtn {
+  background: transparent;
+  border: 1px solid #ff6b9d;
+  color: #ff6b9d;
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.addMapBtn:hover {
+  background: #ff6b9d;
+  color: #1a1a2e;
+}
+
+.loading {
+  color: #888;
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+}
+
+.empty {
+  color: #666;
+  font-size: 0.85rem;
+  padding: 0.5rem 0;
+  font-style: italic;
+}

@@ -10,6 +10,7 @@ export default defineConfig(({ mode }) => {
       port: 3000,
       proxy: {
         '/recommend': env.VITE_BASE_API_URL,
+        '/api': env.VITE_BASE_API_URL,
       },
     },
   }
