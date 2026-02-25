@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { PoolService } from '../pool/pool.service';
 import { Map as MapModel, Prisma } from '@prisma/client';
+import { CreateMapDto } from './dto/create-map.dto';
+import { UpdateMapDto } from './dto/update-map.dto';
 
 export interface MapFilters {
   mod?: string;
@@ -57,7 +59,11 @@ export class MapService {
     return filters;
   }
 
-  async findMaps(mmr: number, range: number, filters?: MapFilters): Promise<MapModel[]> {
+  async findMaps(
+    mmr: number,
+    range: number,
+    filters?: MapFilters,
+  ): Promise<MapModel[]> {
     const where: Prisma.MapWhereInput = {
       pool: {
         averageMMR: {
@@ -98,6 +104,34 @@ export class MapService {
     const line1 = `[https://osu.ppy.sh/b/${map.mapId} ${map.mapName} ★ ${map.starRating.toFixed(2)}] - MMR: ${map.mmr.toFixed(0)} - ${map.poolName}`;
     const line2 = `${map.mapName} [${map.difficultyName}] |⌚ ${this.convertTime(map.length)} | ♪ ${map.bpm} | MOD=${map.mod}`;
     return [line1, line2];
+  }
+
+  async createForPool(poolId: number, data: CreateMapDto) {
+    const pool = await this.prisma.pool.findUnique({
+      where: { id: poolId },
+    });
+    if (!pool)
+      throw new NotFoundException(`Pool with id ${poolId} not found`);
+
+    return this.prisma.map.create({
+      data: { ...data, poolId },
+    });
+  }
+
+  async findOneMap(id: number) {
+    const map = await this.prisma.map.findUnique({ where: { id } });
+    if (!map) throw new NotFoundException(`Map with id ${id} not found`);
+    return map;
+  }
+
+  async updateMap(id: number, data: UpdateMapDto) {
+    await this.findOneMap(id);
+    return this.prisma.map.update({ where: { id }, data });
+  }
+
+  async removeMap(id: number) {
+    await this.findOneMap(id);
+    return this.prisma.map.delete({ where: { id } });
   }
 
   private convertTime(duration: number): string {

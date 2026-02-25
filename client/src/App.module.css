@@ -1,18 +1,34 @@
 .container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-.title {
-  color: #ff6b9d;
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #0f3460;
+  padding-bottom: 1rem;
 }
 
-.subtitle {
+.navLink {
   color: #888;
-  margin-bottom: 1.5rem;
-  font-size: 0.9rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.4rem 0;
+  transition: color 0.2s;
+}
+
+.navLink:hover {
+  color: #e0e0e0;
+}
+
+.navActive {
+  color: #ff6b9d;
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 0.4rem 0;
+  border-bottom: 2px solid #ff6b9d;
 }
