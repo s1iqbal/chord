@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.develop
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+          ignore:
+            - node_modules
+    restart: unless-stopped
+    ports:
+      - "3000:3000"

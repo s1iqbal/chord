@@ -1,58 +1,24 @@
-import { useState, useRef, useCallback } from 'react';
-import { CommandInput } from './components/CommandInput';
-import { PresetButtons } from './components/PresetButtons';
-import { ResultPanel } from './components/ResultPanel';
-import { History } from './components/History';
-import type { RecommendResponse, HistoryEntry } from './types';
-import styles from './App.module.css';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { TestConsole } from './pages/TestConsole.tsx';
 
-const API_URL = `${import.meta.env.VITE_BASE_API_URL}/recommend`;
 function App() {
-  const [result, setResult] = useState<RecommendResponse | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const runCommand = useCallback(async (command: string) => {
-    if (!command.trim()) return;
-
-    setLoading(true);
-    setError(null);
-    setResult(null);
-
-    try {
-      const res = await fetch(
-        `${API_URL}?command=${encodeURIComponent(command.trim())}`
-      );
-      const data: RecommendResponse = await res.json();
-      setResult(data);
-      setHistory((prev) =>
-        [{ command: command.trim(), result: data, timestamp: Date.now() }, ...prev].slice(0, 20)
-      );
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Request failed');
-    } finally {
-      setLoading(false);
-      inputRef.current?.select();
-    }
-  }, []);
-
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Chord Bot Test Console</h1>
-      <p className={styles.subtitle}>
-        Test IRC commands without connecting to Bancho. Results come from the database.
-      </p>
-
-      <CommandInput ref={inputRef} onSubmit={runCommand} loading={loading} />
-      <PresetButtons onSelect={runCommand} />
-      <ResultPanel result={result} loading={loading} error={error} />
-      {history.length > 0 && (
-        <History entries={history} onReplay={runCommand} />
-      )}
-    </div>
+    <BrowserRouter>
+      <div className="min-h-screen bg-slate-900 text-slate-100">
+        <nav className="border-b border-slate-700 bg-slate-800 p-4 flex justify-center gap-6">
+          <Link to="/" className="font-bold hover:text-blue-400">Test Console</Link>
+          <Link to="/about" className="hover:text-blue-400">Settings</Link>
+        </nav>
+        
+        {/* Added flex and items-center to align all child components */}
+        <main className="p-6 max-w-full mx-auto flex flex-col items-center">
+          <Routes>
+            <Route path="/" element={<TestConsole />} />
+            <Route path="/about" element={<div className="text-center p-10">Settings/About Page</div>} />
+          </Routes>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
-
 export default App;

@@ -1,82 +1,35 @@
-import type { RecommendResponse } from '../types';
-import styles from './ResultPanel.module.css';
+export function ResultPanel({ result, loading }: any) {
+  if (loading) return <div className="text-blue-400 text-sm text-center animate-pulse">Querying...</div>;
+  if (!result) return null;
 
-interface Props {
-  result: RecommendResponse | null;
-  loading: boolean;
-  error: string | null;
-}
-
-function linkify(text: string): string {
-  return text.replace(
-    /\[https:\/\/osu\.ppy\.sh\/b\/(\d+)\s+([^\]]+)\]/g,
-    '<a href="https://osu.ppy.sh/b/$1" target="_blank" rel="noopener">$2</a>'
-  );
-}
-
-export function ResultPanel({ result, loading, error }: Props) {
-  if (loading) {
-    return <div className={styles.panel}><span className={styles.meta}>Querying...</span></div>;
-  }
-
-  if (error) {
-    return <div className={styles.panel}><span className={styles.error}>Request failed: {error}</span></div>;
-  }
-
-  if (!result) {
-    return <div className={styles.panel}>Type a command above and hit Send (or press Enter).</div>;
-  }
+  const { map } = result;
 
   return (
-    <div className={styles.panel}>
-      {result.command && (
-        <div className={styles.meta}>Command: {result.command}</div>
-      )}
-      {result.randomMMR !== undefined && (
-        <div className={styles.meta}>Random MMR selected: {result.randomMMR}</div>
-      )}
-      {result.totalMatches !== undefined && (
-        <div className={styles.meta}>Maps matched: {result.totalMatches}</div>
-      )}
-      {result.filtersApplied && (
-        <div className={styles.meta}>
-          Filters: {JSON.stringify(result.filtersApplied)}
+    <div className="bg-slate-800 p-5 rounded-xl border border-slate-700 shadow-xl space-y-4 text-slate-100">
+      {map && (
+        <div className="space-y-3">
+          <img src={`https://assets.ppy.sh/beatmaps/${map.mapSetId}/covers/card.jpg`} className="w-full h-32 object-cover rounded-lg" />
+          <div className="space-y-1 text-center animate-pulse ">
+            <h2 className="text-lg font-bold leading-tight font-semibold uppercase">{map.mapName}</h2>
+            <p className="text-blue-400 text-sm font-semibold">{map.difficultyName}</p>
+          </div>
         </div>
       )}
 
-      <hr className={styles.separator} />
+      <div className="grid grid-cols-2 gap-4 px-2 py-2 text-xs bg-slate-950/50 rounded-lg border border-slate-700 shadow-inner text-slate-100">
+        {/* Added col-span-2 here to make it span both columns */}
+        <div className="col-span-2"><span className="text-slate-500">Pool:</span> {map?.poolName}</div>
+        <div><span className="text-slate-500">MMR:</span> {map?.mmr?.toFixed(0)}</div>
+        <div><span className="text-slate-500">Stars:</span> {map?.starRating?.toFixed(2)}</div>
+        <div><span className="text-slate-500">BPM:</span> {map?.bpm}</div>
+        <div><span className="text-slate-500">Combo:</span> {map?.maxCombo}</div>
+        <div className="col-span-2"><span className="text-slate-500">Mod:</span> {map?.mod}</div>
+      </div>
 
-      {result.messages?.map((msg, i) => (
-        <div
-          key={i}
-          className={styles.msg}
-          dangerouslySetInnerHTML={{ __html: linkify(msg) }}
-        />
-      ))}
-
-      {result.error && (
-        <>
-          <div className={styles.error}>{result.error}</div>
-          {result.examples && (
-            <div className={styles.meta}>
-              <div>Examples:</div>
-              {result.examples.map((ex, i) => (
-                <div key={i}>&nbsp;&nbsp;{ex}</div>
-              ))}
-            </div>
-          )}
-        </>
-      )}
-
-      {result.map && (
-        <>
-          <hr className={styles.separator} />
-          <div className={styles.meta}>Raw map data:</div>
-          <pre className={styles.json}>
-            {JSON.stringify(result.map, null, 2)}
-          </pre>
-        </>
-      )}
+      <details className="pt-2 border-t border-slate-700 text-slate-400 text-xs">
+        <summary className="cursor-pointer text-[9px] font-bold text-slate-500 hover:text-slate-300 uppercase tracking-widest text-center">View Raw JSON</summary>
+        <pre className="bg-black p-3 mt-2 rounded text-[9px] overflow-auto text-slate-400 max-h-40">{JSON.stringify(result, null, 2)}</pre>
+      </details>
     </div>
   );
 }
